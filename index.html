@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Desenvolvedor & Designer UI/UX">
+    <title>Rui Laite | Desenvolvedor & Designer UI/UX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body data-theme="dark">
+    <!-- link de acessibilidade -->
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+    <!-- circular progress -->
+    <div id="loading-screen">
+        <div class="loader"></div>
+        <p class="loading-text">Carregando portfólio...</p>
+    </div>
+
+    <!-- Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- voltar topo -->
+    <button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Container Principal -->
+    <div class="main-container">
+        <header>
+            <!-- <a href="#" class="logo">Dev<span>UX</span></a> -->
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Abrir menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#" class="nav-link active" data-section="home">Início</a></li>
+                    <li><a href="#" class="nav-link" data-section="about">Sobre</a></li>
+                    <li><a href="#" class="nav-link" data-section="projects">Projetos</a></li>
+                    <li><a href="#" class="nav-link" data-section="contact">Contactos</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <!-- Conteúdo -->
+        <div class="content">
+            <div class="sidebar">
+                <div class="profile-img-container">
+                    <img src="https://res.cloudinary.com/dpybwlkmu/image/upload/v1758190895/IMG_5673_iltl9o_txbspt.jpg" alt="Foto de perfil de Seu Nome" class="profile-img">
+                </div>
+                <div class="sidebar-info">
+                    <h2>Rui Laite</h2>
+                    <p>Desenvolvedor & Designer UI/UX</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                        <a href="#" class="social-link" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteúdo Principal -->
+            <div class="main-content" id="main-content">
+                <!-- Partículas -->
+                <div class="particles-bg" id="particles-bg"></div>
+
+                
+                <section id="home" class="section active">
+                    <div class="hero-content">
+                        <h1>Desenvolvedor & <span>Designer UI/UX</span></h1>
+                        <p>Criando experiências digitais excepcionais com foco na inovação, usabilidade e design centrado no usuário.</p>
+                        <a href="#" class="btn view-projects-btn">Ver Projetos</a>
+                    </div>
+                </section>
+                
+                <section id="about" class="section">
+                    <h2 class="section-title">Sobre Mim</h2>
+                    <div class="about-content">
+                        <p>Sou um desenvolvedor e designer UI/UX apaixonado por criar soluções digitais que combinam estética, funcionalidade e experiência do usuário. Com mais de 5 anos de experiência, já trabalhei em diversos projetos para startups e empresas estabelecidas.</p>
+                        <p>Minha abordagem combina conhecimento técnico sólido com sensibilidade visual, resultando em produtos que não apenas funcionam perfeitamente, mas também encantam os utilizadores.</p>
+                        <div class="skills">
+                            <div class="skill">UI/UX Design</div>
+                            <div class="skill">Desenvolvimento Front-end</div>
+                            <div class="skill">Prototipagem</div>
+                            <div class="skill">Design System</div>
+                            <div class="skill">HTML/CSS/JS</div>
+                            <div class="skill">React</div>
+                            <div class="skill">Figma</div>
+                            <div class="skill">Adobe Creative Suite</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="projects" class="section">
+                    <h2 class="section-title">Meus Projetos</h2>
+                    <div class="projects-grid">
+                        <div class="project-card" data-project="1">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80" alt="Dashboard Financeiro" class="project-img">
+                            <div class="project-info">
+                                <h3 class="project-title">Dashboard Financeiro</h3>
+                                <p class="project-desc">Interface moderna para visualização de dados financeiros com foco na experiência do usuário.</p>
+                            </div>
+                        </div>
+                        <div class="project-card" data-project="2">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="App de Viagens" class="project-img">
+                            <div class="project-info">
+                                <h3 class="project-title">App de Viagens</h3>
+                                <p class="project-desc">Aplicativo móvel com design intuitivo para planejamento e reserva de viagens.</p>
+                            </div>
+                        </div>
+                        <div class="project-card" data-project="3">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1715&q=80" alt="E-commerce" class="project-img">
+                            <div class="project-info">
+                                <h3 class="project-title">E-commerce</h3>
+                                <p class="project-desc">Plataforma de e-commerce com foco na conversão e experiência de compra.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contact" class="section">
+                    <h2 class="section-title">Entre em Contato</h2>
+                    <div class="form-success" id="form-success">
+                        Mensagem enviada com sucesso! Entrarei em contato em breve.
+                    </div>
+                    <div class="contact-container">
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h3>Email</h3>
+                                    <p>r-laite@outlook.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h3>Telefone</h3>
+                                    <p>+258 84 252 5842 </p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h3>Localização</h3>
+                                    <p>Maputo, Moçambique</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-form">
+                            <form id="contact-form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" placeholder="Seu nome" required>
+                                    <div class="form-error" id="name-error">Por favor, insira seu nome</div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" placeholder="Seu email" required>
+                                    <div class="form-error" id="email-error">Por favor, insira um email válido</div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="subject" placeholder="Assunto" required>
+                                    <div class="form-error" id="subject-error">Por favor, insira um assunto</div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="message" placeholder="Sua mensagem" required></textarea>
+                                    <div class="form-error" id="message-error">Por favor, insira sua mensagem</div>
+                                </div>
+                                <button type="submit" class="btn" id="submit-btn">Enviar Mensagem</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <footer>
+            <p class="copyright">© 2024 Rui Laite. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <div class="modal" id="project-modal">
+        <div class="modal-content">
+            <span class="close-modal" aria-label="Fechar modal">&times;</span>
+            <img src="" alt="Projeto" class="modal-img" id="modal-img">
+            <div class="modal-info">
+                <h3 id="modal-title"></h3>
+                <p id="modal-desc"></p>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
