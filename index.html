@@ -57,10 +57,10 @@
                     <h2>Rui Laite</h2>
                     <p>Desenvolvedor & Designer UI/UX</p>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="www.linkedin.com/in/laite" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/R-light07" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
                         <a href="#" class="social-link" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
-                        <a href="#" class="social-link" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                        <!-- <a href="#" class="social-link" aria-label="Behance"><i class="fab fa-behance"></i></a> -->
                     </div>
                 </div>
             </div>
@@ -139,7 +139,7 @@
                 </section>
 
                 <section id="contact" class="section">
-                    <h2 class="section-title">Entre em Contato</h2>
+                    <h2 class="section-title">Entre em Contacto</h2>
                     <div class="form-success" id="form-success">
                         Mensagem enviada com sucesso! Entrarei em contato em breve.
                     </div>
@@ -175,28 +175,31 @@
                         </div>
                         <div class="contact-form">
                             <form
-                                id="contact-form"
                                 action="https://formspree.io/f/xkgadjdb"
                                 method="POST"
+                                form-control="required"
                             >
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="name" placeholder="Seu nome" required>
-                                    <div class="form-error" id="name-error">Por favor, insira seu nome</div>
+                                    <!-- <label for="name">Nome</label> -->
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Nome" required>
                                 </div>
+                                
                                 <div class="form-group">
-                                    <input type="email" class="form-control" id="email" placeholder="Seu email" required>
-                                    <div class="form-error" id="email-error">Por favor, insira um email válido</div>
+                                    <!-- <label for="email">Email</label> -->
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="Endereço de Email" required>
                                 </div>
+                                
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="subject" placeholder="Assunto" required>
-                                    <div class="form-error" id="subject-error">Por favor, insira um assunto</div>
+                                    <!-- <label for="phone">Telefone</label> -->
+                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="Telefone">
                                 </div>
+                                
                                 <div class="form-group">
-                                    <textarea class="form-control" id="message" placeholder="Sua mensagem" required></textarea>
-                                    <div class="form-error" id="message-error">Por favor, insira sua mensagem</div>
+                                    <!-- <label for="message">Mensagem</label> -->
+                                    <textarea id="message" name="messagem" class="form-control" placeholder="Sua Mensagem" required></textarea>
                                 </div>
-                                <button type="submit" class="btn" id="submit-btn">Enviar Mensagem</button>
-                            </form>
+                                
+                                <button type="submit" class="btn submit-btn">Enviar Mensagem</button>
                         </div>
                     </div>
                 </section>
