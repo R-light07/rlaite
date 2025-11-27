@@ -1,13 +1,17 @@
+// Sistema de Loading
 window.addEventListener('load', function() {
     const loadingScreen = document.getElementById('loading-screen');
     setTimeout(() => {
         loadingScreen.style.opacity = '0';
         setTimeout(() => {
             loadingScreen.style.display = 'none';
+            // Iniciar partículas após loading
+            createSnowflakes();
         }, 500);
     }, 1500);
 });
 
+// Cursor Personalizado
 const cursor = document.querySelector('.cursor');
 const cursorFollower = document.querySelector('.cursor-follower');
 
@@ -47,6 +51,7 @@ document.querySelectorAll('a, button, .project-card, .skill').forEach(element =>
     });
 });
 
+// Menu Mobile
 const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
 const navMenu = document.getElementById('nav-menu');
 
@@ -71,6 +76,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
+// Sistema de Temas
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = themeToggle.querySelector('i');
 
@@ -98,49 +104,116 @@ function updateThemeIcon(theme) {
     }
 }
 
-function createParticles() {
+// SISTEMA DE FLOCOS DE NEVE MELHORADO
+// Sistema de Partículas de Neve no Fundo Principal
+function createSnowflakes() {
     const container = document.getElementById('particles-bg');
-    const particleCount = 20;
+    const snowflakeCount = 60; // Número otimizado para fundo
     
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'absolute';
-        particle.style.width = Math.random() * 5 + 2 + 'px';
-        particle.style.height = particle.style.width;
-        particle.style.background = `rgba(${Math.random() * 100 + 100}, ${Math.random() * 100 + 100}, 255, ${Math.random() * 0.5 + 0.2})`;
-        particle.style.borderRadius = '50%';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.boxShadow = '0 0 10px rgba(108, 99, 255, 0.5)';
+    // Limpar partículas antigas
+    container.innerHTML = '';
+    
+    for (let i = 0; i < snowflakeCount; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
         
-        container.appendChild(particle);
+        // Propriedades variadas para realismo
+        const size = Math.random() * 8 + 2; // Tamanhos variados
+        const opacity = Math.random() * 0.8 + 0.2;
+        const animationDuration = Math.random() * 10 + 5; // 5-15 segundos
+        const startDelay = Math.random() * 5;
+        const startPosition = Math.random() * 100;
         
-        animateParticle(particle);
+        snowflake.style.cssText = `
+            position: fixed;
+            width: ${size}px;
+            height: ${size}px;
+            background: linear-gradient(45deg, 
+                rgba(255, 255, 255, ${opacity}), 
+                rgba(220, 240, 255, ${opacity * 0.7})
+            );
+            border-radius: 50%;
+            filter: blur(${Math.random() * 1.2}px);
+            pointer-events: none;
+            z-index: -1;
+            left: ${startPosition}%;
+            top: -50px;
+            opacity: ${opacity};
+            box-shadow: 
+                0 0 ${size * 1.5}px rgba(255, 255, 255, ${opacity * 0.4}),
+                inset 0 0 ${size * 0.8}px rgba(255, 255, 255, 0.6);
+            animation: snowfall ${animationDuration}s linear ${startDelay}s infinite;
+        `;
+        
+        container.appendChild(snowflake);
     }
 }
 
-function animateParticle(particle) {
-    let x = parseFloat(particle.style.left);
-    let y = parseFloat(particle.style.top);
-    let xSpeed = (Math.random() - 0.5) * 0.3;
-    let ySpeed = (Math.random() - 0.5) * 0.3;
+// Atualizar partículas quando o tema mudar
+function updateSnowflakesTheme() {
+    const snowflakes = document.querySelectorAll('.snowflake');
+    const currentTheme = document.body.getAttribute('data-theme');
     
-    function move() {
-        x += xSpeed;
-        y += ySpeed;
-        
-        if (x <= 0 || x >= 100) xSpeed *= -1;
-        if (y <= 0 || y >= 100) ySpeed *= -1;
-        
-        particle.style.left = x + '%';
-        particle.style.top = y + '%';
-        
-        requestAnimationFrame(move);
-    }
-    
-    move();
+    snowflakes.forEach(snowflake => {
+        if (currentTheme === 'light') {
+            snowflake.style.background = `linear-gradient(45deg, 
+                rgba(0, 0, 0, 0.3), 
+                rgba(80, 100, 150, 0.2)
+            )`;
+            snowflake.style.boxShadow = `
+                0 0 8px rgba(0, 0, 0, 0.2),
+                inset 0 0 4px rgba(255, 255, 255, 0.5)
+            `;
+        } else {
+            snowflake.style.background = `linear-gradient(45deg, 
+                rgba(255, 255, 255, 0.9), 
+                rgba(220, 240, 255, 0.7)
+            )`;
+            snowflake.style.boxShadow = `
+                0 0 8px rgba(255, 255, 255, 0.3),
+                inset 0 0 4px rgba(255, 255, 255, 0.8)
+            `;
+        }
+    });
 }
 
+// Modificar o event listener do tema para atualizar as partículas
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    updateThemeIcon(newTheme);
+    updateSnowflakesTheme(); // Atualizar cores das partículas
+});
+
+// Inicializar partículas quando a página carregar
+window.addEventListener('load', function() {
+    const loadingScreen = document.getElementById('loading-screen');
+    setTimeout(() => {
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            // Iniciar partículas no fundo principal
+            createSnowflakes();
+        }, 500);
+    }, 1500);
+});
+
+// Recriar partículas quando a janela for redimensionada (otimização)
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        createSnowflakes();
+    }, 250);
+});
+
+// ... o resto do JavaScript permanece igual ...
+
+// Navegação entre Seções
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('.section');
 const viewProjectsBtn = document.querySelector('.view-projects-btn');
@@ -183,6 +256,8 @@ window.addEventListener('load', () => {
         switchSection(hash);
     }
 });
+
+// Modal de Projetos
 const projectCards = document.querySelectorAll('.project-card');
 const modal = document.getElementById('project-modal');
 const modalImg = document.getElementById('modal-img');
@@ -228,9 +303,9 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-const contactForm = document.getElementById('contact-form');
+// Validação de Formulário
+const contactForm = document.querySelector('form');
 const formSuccess = document.getElementById('form-success');
-const submitBtn = document.getElementById('submit-btn');
 
 function validateField(field, errorElement) {
     if (field.value.trim() === '') {
@@ -257,48 +332,7 @@ function validateEmail(email, errorElement) {
     }
 }
 
-document.getElementById('name').addEventListener('blur', function() {
-    validateField(this, document.getElementById('name-error'));
-});
-
-document.getElementById('email').addEventListener('blur', function() {
-    validateEmail(this, document.getElementById('email-error'));
-});
-
-document.getElementById('subject').addEventListener('blur', function() {
-    validateField(this, document.getElementById('subject-error'));
-});
-
-document.getElementById('message').addEventListener('blur', function() {
-    validateField(this, document.getElementById('message-error'));
-});
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const nameValid = validateField(document.getElementById('name'), document.getElementById('name-error'));
-    const emailValid = validateEmail(document.getElementById('email'), document.getElementById('email-error'));
-    const subjectValid = validateField(document.getElementById('subject'), document.getElementById('subject-error'));
-    const messageValid = validateField(document.getElementById('message'), document.getElementById('message-error'));
-    
-    if (nameValid && emailValid && subjectValid && messageValid) {
-
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-        
-        setTimeout(() => {
-            formSuccess.style.display = 'block';
-            contactForm.reset();
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = 'Enviar Mensagem';
-            
-            setTimeout(() => {
-                formSuccess.style.display = 'none';
-            }, 5000);
-        }, 2000);
-    }
-});
-
+// Botão Voltar ao Topo
 const backToTopBtn = document.getElementById('back-to-top');
 
 window.addEventListener('scroll', () => {
@@ -316,4 +350,68 @@ backToTopBtn.addEventListener('click', () => {
     });
 });
 
-createParticles();
+// Efeito de Digitação na Hero Section
+function initTypingEffect() {
+    const heroTitle = document.querySelector('.hero-content h1');
+    const originalText = heroTitle.innerHTML;
+    const words = ['Designer UI/UX', 'Analista de OS', 'Fotógrafo'];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function type() {
+        const currentWord = words[wordIndex];
+        
+        if (isDeleting) {
+            charIndex--;
+        } else {
+            charIndex++;
+        }
+        
+        heroTitle.innerHTML = `Desenvolvedor & <span>${currentWord.substring(0, charIndex)}</span>`;
+        
+        let typeSpeed = isDeleting ? 50 : 100;
+        
+        if (!isDeleting && charIndex === currentWord.length) {
+            typeSpeed = 2000; // Pausa no final
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            typeSpeed = 500;
+        }
+        
+        setTimeout(type, typeSpeed);
+    }
+    
+    // Iniciar efeito após 1 segundo
+    setTimeout(type, 1000);
+}
+
+// Inicializar efeitos quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', () => {
+    initTypingEffect();
+});
+
+// Otimização de Performance - Intersection Observer para animações
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observar elementos para animação
+document.querySelectorAll('.project-card, .skill, .contact-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});

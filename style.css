@@ -48,13 +48,14 @@ html {
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    /* overflow-x: hidden; */
     transition: var(--transition);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 2rem;
+    position: relative;
+    overflow-x: hidden;
 }
 
 /* Skip link para acessibilidade */
@@ -141,14 +142,18 @@ body {
     max-width: 1200px;
     height: 90vh;
     max-height: 800px;
-    background: var(--card-bg);
+    background: rgba(30, 30, 30, 0.85); /* Fundo semi-transparente */
+    backdrop-filter: blur(10px); /* Efeito de vidro */
     border-radius: 20px;
-    box-shadow: var(--card-shadow);
-    /* overflow: hidden; */
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
     position: relative;
     display: flex;
     flex-direction: column;
     z-index: 1;
+    opacity: .9;
 }
 
 /* Header e Navegação */
@@ -758,12 +763,18 @@ footer {
 
 @media (max-width: 768px) {
     body {
-        padding: 1rem;
+        padding: 0rem;
+        /* top: -30px; */
     }
     
     .main-container {
-        width: 95%;
-        height: 95vh;
+        width: 100%;
+        height: 100vh;
+        max-height: none;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
     }
     
     nav ul {
@@ -831,4 +842,118 @@ footer {
     .main-content {
         padding: 1.5rem;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Adicione estas regras no início ou no local apropriado */
+
+/* Partículas de Fundo - AGORA NO BODY */
+.particles-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Fica atrás de tudo */
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Efeito de Partículas de Neve no Fundo */
+.snowflake {
+    position: absolute;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.9), 
+        rgba(220, 240, 255, 0.7)
+    );
+    border-radius: 50%;
+    filter: blur(0.8px);
+    pointer-events: none;
+    z-index: -1;
+    animation: snowfall linear infinite;
+}
+
+/* Animação de Neve mais suave para o fundo */
+@keyframes snowfall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Ajuste para tema light */
+[data-theme="light"] .main-container {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Remover partículas antigas do main-content */
+.main-content .particles-bg {
+    display: none;
+}
+
+/* Ajuste no header para ficar sobre as partículas */
+header {
+    background-color: var(--header-bg);
+    backdrop-filter: blur(15px); /* Aumentado para mais efeito de vidro */
+}
+
+/* Melhor contraste para as partículas no tema light */
+[data-theme="light"] .snowflake {
+    background: linear-gradient(45deg, 
+        rgba(0, 0, 0, 0.3), 
+        rgba(80, 100, 150, 0.2)
+    );
+    box-shadow: 
+        0 0 8px rgba(0, 0, 0, 0.2),
+        inset 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+/* Performance - Reduzir partículas em mobile */
+@media (max-width: 768px) {
+    .snowflake {
+        display: none; /* Desativar completamente em mobile */
+    }
+    
+    .main-container {
+        backdrop-filter: none; /* Remover blur em mobile para performance */
+        background: var(--card-bg);
+    }
+}
+
+/* Efeito de profundidade nas partículas */
+.snowflake:nth-child(odd) {
+    animation-duration: 8s;
+    animation-delay: 0s;
+}
+
+.snowflake:nth-child(even) {
+    animation-duration: 12s;
+    animation-delay: 1s;
+}
+
+.snowflake:nth-child(3n) {
+    animation-duration: 15s;
+    animation-delay: 2s;
 }
