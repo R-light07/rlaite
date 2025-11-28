@@ -415,3 +415,83 @@ document.querySelectorAll('.project-card, .skill, .contact-item').forEach(el => 
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
 });
+
+// Variáveis para controle da sidebar
+let lastScrollTop = 0;
+let sidebarHidden = false;
+const sidebar = document.querySelector('.sidebar');
+
+// Função para mostrar/esconder sidebar no scroll
+function handleSidebarScroll() {
+    if (window.innerWidth <= 768) { // Apenas em mobile
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Scroll para baixo - esconder sidebar
+        if (currentScroll > lastScrollTop && currentScroll > 100) {
+            if (!sidebarHidden) {
+                hideSidebar();
+            }
+        } 
+        // Scroll para cima - mostrar sidebar
+        else if (currentScroll < lastScrollTop) {
+            if (sidebarHidden) {
+                showSidebar();
+            }
+        }
+        
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    } else {
+        // Em desktop, garantir que sidebar esteja visível
+        showSidebar();
+    }
+}
+
+// Função para esconder sidebar com efeito
+function hideSidebar() {
+    sidebar.style.transform = 'translateY(-100%)';
+    sidebar.style.opacity = '0';
+    sidebar.style.pointerEvents = 'none';
+    sidebarHidden = true;
+    
+    // Ajustar o main-content para ocupar espaço extra
+    const mainContent = document.querySelector('.main-content');
+    mainContent.style.marginTop = '0';
+    mainContent.style.transition = 'margin-top 0.3s ease';
+}
+
+// Função para mostrar sidebar com efeito
+function showSidebar() {
+    sidebar.style.transform = 'translateY(0)';
+    sidebar.style.opacity = '1';
+    sidebar.style.pointerEvents = 'auto';
+    sidebarHidden = false;
+    
+    // Restaurar margin do main-content
+    const mainContent = document.querySelector('.main-content');
+    mainContent.style.marginTop = '';
+}
+
+// Event listener para scroll
+window.addEventListener('scroll', handleSidebarScroll);
+
+// Re-inicializar quando a janela for redimensionada
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        showSidebar(); // Sempre mostrar em desktop
+    }
+});
+
+// Inicializar estado da sidebar
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.innerWidth <= 768) {
+        // Adicionar transição CSS via JavaScript para controle preciso
+        sidebar.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    }
+});
+
+// Otimização: Debounce para o scroll
+let scrollTimeout;
+window.addEventListener('scroll', function() {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(handleSidebarScroll, 10);
+});
