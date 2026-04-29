@@ -500,6 +500,15 @@ nav ul li a:hover::after, nav ul li a.active::after {
     padding: 1.5rem;
 }
 
+.project-card a {
+    margin: 20px;
+    padding: 5px 20px;
+    border: 1px solid #888888;
+    border-radius: 10px;
+    color: #6C63FF;
+    text-decoration: none;
+}
+
 .project-title {
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
